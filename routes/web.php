@@ -12,8 +12,10 @@
 */
 Route::post('/loginUser', 'LoginController@login');
 Route::post('/register', 'RegisterController@register');
-ROute::get('/logout', 'LoginController@logout');
-
+Route::get('/logout', 'LoginController@logout');
+//Route::get('/getuser', 'LoginController@updateProfile');
+//Route::get('listtraining', 'TrainingController@listtraining');
+Route::get('/debug', 'HomeController@getUserInfo');
 
 Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('mcharts', function() {
@@ -33,7 +35,7 @@ Route::get('/registerpage', function() {
 	}
 });
 
-Route::get('/login', function()
+Route::get('login', function()
 {
 	if(session()->has('email') && session()->has('password')){
 		return View::make('mcharts');
@@ -46,7 +48,12 @@ Route::get('/login', function()
 
 Route::get('/', function()
 {
-	return View::make('home');
+	if(session()->has('email') && session()->has('password')){
+		return View::make('mcharts');
+	}
+	else{
+		return View::make('login');
+	}
 });
 
 Route::get('/charts', function()

@@ -2,9 +2,12 @@
 @section ('body')
 
 @if(Session::has('message'))
-   <p class="alert {{ Session::get('alert-class', 'alert-info') }}" align="center">{{ Session::get('message') }}</p>
-    
-<@endif
+    <p class="alert {{ Session::get('alert-class', 'alert-info') }}" align="center">{{ Session::get('message') }}</p>
+@endif
+
+@if(Session::has('messagesalah'))
+    <p class="alert {{ Session::get('alert-class', 'alert-danger') }}" align="center">{{ Session::get('messagesalah') }}</p>
+@endif
 
 <div class="container">
         <div class="row">

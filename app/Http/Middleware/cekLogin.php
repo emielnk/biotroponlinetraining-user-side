@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
@@ -17,8 +18,9 @@ class cekLogin
     {
         //return $next($request);
         $response = $next($request);
+        $user = Auth::user();
         //dd($response);
-         if ( !$request->session()->has('email') && !$request->session()->has('password')){
+        if ( !$request->session()->has('email') && !$request->session()->has('password')){
             return redirect('login');
          }
         return $response;

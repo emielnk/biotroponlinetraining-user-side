@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\training;
+use App\Models\Training;
 
 
 class TrainingController extends Controller
@@ -13,7 +13,7 @@ class TrainingController extends Controller
     public function listtraining()
     {
         $list = Training::all();
-        return view('listtraining', ['list'=>$list]);
+        return view('mcharts', ['list'=>$list]);
     }
 
     public function destroy($id_training)
