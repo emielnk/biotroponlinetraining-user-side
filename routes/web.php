@@ -10,25 +10,34 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// debugging
+Route::get('/debuguserinfo', 'UserController@getCurrentUserInfo');
+Route::get('/debugregistraining', 'RegisTrainingController@registertraining');
+Route::get('debugisexist/{id_user}/{id_training}', 'RegisTrainingController@isPartisipanExist');
+
 Route::post('/loginUser', 'LoginController@login');
 Route::post('/register', 'RegisterController@register');
 Route::get('/logout', 'LoginController@logout');
 //Route::get('/getuser', 'LoginController@updateProfile');
 //Route::get('listtraining', 'TrainingController@listtraining');
-Route::get('/debug', 'HomeController@getUserInfo');
+
 
 Route::group(['middleware' => 'loginKernel'], function() {
-	Route::get('mcharts', function() {
-		return View::make('mcharts');
+	Route::get('main', function() {
+		return View::make('main');
 	});
 	Route::get('registraining', function() {
 		return View::make('registraining');
 	});
+	//Route::get('registertraining', 'RegisTrainingController@showavalibel');
+	Route::get('main', 'RegisTrainingController@showavalible');
+	Route::get('registertraining/formjoin/{id_user}/{id_training}', 'RegisTrainingController@registertrainingView');
+	Route::post('registertraining/join/{id_training}', 'RegisTrainingController@registertraining');
 });
 
 Route::get('/registerpage', function() {
 	if(session()->has('email') && session()->has('password')){
-		return View::make('mcharts');
+		return View::make('main');
 	}
 	else{
 		return View::make('registerpage');

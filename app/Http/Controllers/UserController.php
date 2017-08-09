@@ -7,56 +7,13 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-  function checkLogin(Request $req)
-  {
-      $validator = Validator::make($req->all(),
-      [
-            'email' => [
-                    'required',
-                    'min:3',
-                    'exists:user,email'
-                  ],
-
-            'password' => [
-                    'required',
-                    'min:3',
-                  ],
-      ]);
-
-      if ($validator->fails())
-      {
-        return redirect('login')
-            ->withErrors($validator)
-            ->withInput();
-      }
-
-      $email= $req->email;
-      $password = md5($req->password);
-
-      //dd($email, $password);
-      // dd($take);
-
-      $check = user::where('email',$email)->where('password',$password)->count();
-      if( !($check > 0) )  {
-         return redirect('login')->with('status', 'salah');
-      }
-
-      $take = user::where('email',$email)->where('password',$password)->first();
-
-      session(['email' => $take->email]);
-      session(['password' => true]);
-
-      return redirect('dashboard');
+  function getCurrentUserInfo() {
+    $user_id = session()->get('id_loggedin_user');
+    $currentUser = User::find($user_id);
+    //dd($currentUser);
+    return $currentUser;
   }
-
-  function logout(Request $req)
-  {
-      $req->session()->regenerate();
-      $req->session()->flush();
-
-      return redirect('login');
-  }
-
+  
   
 
 

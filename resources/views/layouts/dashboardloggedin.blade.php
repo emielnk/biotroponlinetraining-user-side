@@ -21,15 +21,9 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        @if(Auth::user())
-                            <?php
-                                echo "wwkwk";
-                            ?>
-                        @endif
                  
                         <li><a href="{{ url ('userprofile')}}"><i class="fa fa-user fa-fw"></i>User Profile</a>
                         </li>
-             
                         <li class="divider"></li>
                         <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
@@ -53,27 +47,11 @@
                         </li>
 
                         <li >
-                            <a href="#"><i class="fa fa-book fa-fw"></i> Training <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li {{ (Request::is('*newtraining') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('newtraining') }}">New Training</a>
-                                </li>
-                                <li {{ (Request::is('*listtraining') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('listtraining' ) }}">List Training</a>
-                                </li>
-                                <li {{ (Request::is('*listpemohon') ? 'class="active"' : '') }}>
-                                    <a href="{{ url('listpemohon') }}">List Pemohon</a>
-                                </li>
-                            </ul>
+                            <a href="/main"><i class="fa fa-book fa-fw"></i> Training</a>
                         </li>
 
                         <li {{ (Request::is('*evaluasi') ? 'class="active"' : '') }}>
                             <a href="{{ url ('evaluasi') }}"><i class="fa fa-thumbs-o-up fa-fw"></i> Evaluasi </a>
-                        </li>
-
-
-                        <li {{ (Request::is('*listuser') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('listuser') }}"><i class="fa fa-user fa-fw"></i> User </a>
                         </li>
 
                     </ul>
