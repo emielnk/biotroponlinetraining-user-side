@@ -12,7 +12,9 @@ class RegisTrainingController extends Controller
 {
     public function showavalible() {
         $trainings = Training::all();
+        // $partisipants = Partisipan::where('id_user', session()->get('id_loggedin_user'));
         // $partisipans = Partisipan::all();
+        // session(['user_telah_ikut' => true]);
         return view('main', ['list' => $trainings]);
     }
 
@@ -24,8 +26,20 @@ class RegisTrainingController extends Controller
             return view('registraining', ['get' => $gettraining]);
         }
         else {
-            session()->flash('existUser', "you've been Applying");
-            return $this->showavalible();
+            // session()->flash('existUser', "you've been Applying");
+            if($this->isAccepted($id_currentuser, $id_currenttraining)) {
+                return redirect()->action('TrainingController@getPertemuan', ['id_training' => (int)$id_currenttraining]);
+            }
+            else{
+                // $session['telah_ikut'] = ()$id_currentuser;
+                session(['user_telah_ikut' => (int)$id_currentuser]);
+                session(['di_training' => (int)$id_currenttraining]);
+                // dd(session()->get('di_training'));
+                // dd(session()->get('user_telah_ikut'));
+                // dd(session()->get('id_loggedin_user'));
+                // dd(session()->all());
+                return redirect('main');
+            }
         }
     }
     
@@ -41,23 +55,31 @@ class RegisTrainingController extends Controller
         $partisipan = New Partisipan;
         $partisipan->id_training = $id_currenttraining;
         $partisipan->id_user = session()->get('id_loggedin_user');
-        $partisipan->status = null;
+        $partisipan->status = 0;
         $partisipan->current_research = $req->recentResearch;
-        $partisipan->published_works = $req->recentPublishedWork;
+        $partisipan->published_works = $req->recentPublishedWorks;
         $partisipan->recent_attended = $req->recentAttended;
         $partisipan->tujuan_ikut = $req->reasonForJoin;
-        $partisipan->use_learning = $req->useTheLearning;
-        //dd($partisipan);
+        $partisipan->use_learning = $req->useTheLearnings;
+        $partisipan->save();
+        return redirect('main');
+        // dd($partisipan);
     }
 
-    public function isPartisipanExist($id, $id_training) {
-        $isExist = Partisipan::where('id_user',63)->exists() && Partisipan::where('id_training',2)->exists();
+    public function isPartisipanExist($id_user, $id_training) {
+        $isExist = Partisipan::where('id_user', $id_user)->where('id_training', $id_training)->exists();//->exists() && Partisipan::where('id_training',2)->exists();
         // dd($isExist);
-        if($isExist) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return $isExist;
+    }
+
+    public function isAccepted($id_user, $id_training) {
+        $isAccepted = Partisipan::where('id_user', $id_user)->where('id_training', $id_training)->where('status', 1)->exists();
+        // dd($isAccepted);
+        return $isAccepted;
+    }
+
+    public function cekPartisipan() {
+        $id_user = session()->get('id_loggedin_user');
+        
     }
 }

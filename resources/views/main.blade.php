@@ -2,45 +2,66 @@
 @section('page_heading','Availible Online Training')
 @section('section')
 
-<!--<div class="row">
-  <div class="container">
-    <div class="col-lg-12">
-        <table id="showavalible" class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nama Training</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Akhir</th>
-                    <th>Deskripsi</th>
-                    <th align='center'>Banyak Pertemuan</th>
-                    <th>Join</th>        
-                </tr>
-            </thead>
-                <tbody>
-                  @foreach ($list as $listtrain)
-                  <tr>
-                        <td><a href="listtraining/show/{{ $listtrain->id_training }}"> {{ $listtrain->nama_training }} </a> </td>
-                        <td> {{ $listtrain->tanggal_mulai }} </td>
-                        <td> {{ $listtrain->tanggal_akhir }} </td>
-                        <td> {!! substr($listtrain->deskripsi_training,0,50) !!}....  </td>
-                        <td align="center"> {{ $listtrain->banyak_pertemuan }} </td>
-                        @if(session('existUser'))
-                            <td>You've been applying, please wait for confirmation</td>
-                        @else
-                            <td><a href="registertraining/formjoin/{{ session()->get('id_loggedin_user') }}/{{$listtrain->id_training}}"><button class="btn btn-success">Join in This Training</button></a></td>
-                        @endif
-                    </tr>
-                  @endforeach
-                </tbody>
+    <!-- @if(session()->get('user_telah_ikut'))
+    <script type="text/javascript">
+        $(function() {
+            $('#myModals').modal('show');
+        });
+    </script>
+    @endif -->
 
-        </table>
+    <style>
+    body, html {
+        height: 100%;
+    }
+
+    .bg {
+        /* The image used */
+        background-image: url("http://previews.123rf.com/images/smithore/smithore1009/smithore100900016/7812712-ulva-seagrass-closeup-with-many-bubbles-Stock-Photo.jpg");
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    </style>
+
+    @foreach($list as $listtrain)
+        <div class="jumbotron">
+            <div class="container" align="center">
+                <h1>{{ $listtrain->nama_training }}</h1>
+                <p>{{ $listtrain->deskripsi_training }}</p>
+                    <ul>
+                        <p><li>Date Start:  <strong>{{ $listtrain->tanggal_mulai }}</strong></li></p> 
+                        <p><li>Date End  :  <strong>{{ $listtrain->tanggal_akhir }}</strong></li></p>
+                    </ul>
+                    @if((session()->get('user_telah_ikut')===session('id_loggedin_user')) && (session()->get('di_training')=== $listtrain->id_training))
+                   <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModals">You've applying this training</button>       
+                    @else
+                    <p><a class="btn btn-primary btn-lg" href="registertraining/formjoin/{{ session()->get('id_loggedin_user') }}/{{ $listtrain->id_training }}" role="button">Apply This Training</a></p>
+                    @endif
+            </div>
+        </div>
+    @endforeach
+    <div id="myModals" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">You've applying this training</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please Wait For Confirmations from SEAMEO BIOTROP</p>
+                <p>Please Check Your Email For Notifications<p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
     </div>
-</div>-->
-<div class="panel panel-default">
-  <div class="panel-body">
-    Panel content
-  </div>
-  <div class="panel-footer">Panel footer</div>
-</div>
-
 @stop

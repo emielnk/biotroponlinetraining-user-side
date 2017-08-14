@@ -46,7 +46,7 @@ class LoginController extends Controller
             // $currentuser = $this->getUserId($userarray);
             $trainings = $this->listtraining();
             // dd($trainings);
-            return redirect('mcharts')->with('auth', $user);
+            return redirect('main')->with('auth', $user);
         }
         Session::flash('messagesalah', 'Wrong email or password');
         Session::flash('alert-class', 'alert-danger'); 

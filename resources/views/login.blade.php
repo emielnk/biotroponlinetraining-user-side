@@ -8,7 +8,26 @@
 @if(Session::has('messagesalah'))
     <p class="alert {{ Session::get('alert-class', 'alert-danger') }}" align="center">{{ Session::get('messagesalah') }}</p>
 @endif
+<style>
+    body, html {
+        height: 100%;
+    }
 
+    .bg {
+        /* The image used */
+        background-image: url("http://www.magic4walls.com/wp-content/uploads/2014/04/tulips-red-flower-grass-plant-water-green-macro-hd-wallpaper.jpg");
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<div class="bg">
 <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -40,4 +59,5 @@
             </div>
         </div>
     </div>
+</div>
 @stop

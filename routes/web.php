@@ -24,20 +24,22 @@ Route::get('/logout', 'LoginController@logout');
 
 Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('main', function() {
-		return View::make('main');
+		return redirect()->action('RegisTrainingController@showavalible');
 	});
+	Route::get('trainingpage/{id_training}', 'TrainingController@getPertemuan');
 	Route::get('registraining', function() {
 		return View::make('registraining');
 	});
-	//Route::get('registertraining', 'RegisTrainingController@showavalibel');
+	// Route::get('registertraining', 'RegisTrainingController@showavalibel');
 	Route::get('main', 'RegisTrainingController@showavalible');
 	Route::get('registertraining/formjoin/{id_user}/{id_training}', 'RegisTrainingController@registertrainingView');
+	Route::get('/', 'RegisTrainingController@showavalible');
 	Route::post('registertraining/join/{id_training}', 'RegisTrainingController@registertraining');
 });
 
 Route::get('/registerpage', function() {
 	if(session()->has('email') && session()->has('password')){
-		return View::make('main');
+		return redirect()->action('RegisTrainingController@showavalible');
 	}
 	else{
 		return View::make('registerpage');
@@ -47,7 +49,7 @@ Route::get('/registerpage', function() {
 Route::get('login', function()
 {
 	if(session()->has('email') && session()->has('password')){
-		return View::make('mcharts');
+		return redirect()->action('RegisTrainingController@showavalible');
 	}
 	else{
 		return View::make('login');
@@ -55,15 +57,15 @@ Route::get('login', function()
 });
 
 
-Route::get('/', function()
-{
-	if(session()->has('email') && session()->has('password')){
-		return View::make('mcharts');
-	}
-	else{
-		return View::make('login');
-	}
-});
+// Route::get('/', function()
+// {
+// 	if(session()->has('email') && session()->has('password')){
+// 		return View::make('main');
+// 	}
+// 	else{
+// 		return View::make('login');
+// 	}
+// });
 
 Route::get('/charts', function()
 {
