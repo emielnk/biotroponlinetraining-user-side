@@ -30,6 +30,7 @@ Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('registraining', function() {
 		return View::make('registraining');
 	});
+	Route::get('trainingpage/bahan/{id_pertemuan}', 'TrainingController@getBahan');
 	// Route::get('registertraining', 'RegisTrainingController@showavalibel');
 	Route::get('main', 'RegisTrainingController@showavalible');
 	Route::get('registertraining/formjoin/{id_user}/{id_training}', 'RegisTrainingController@registertrainingView');
