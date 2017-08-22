@@ -20,24 +20,24 @@ class RegisTrainingController extends Controller
 
     public function registertrainingView($id_currentuser, $id_currenttraining) {
         $gettraining = Training::find($id_currenttraining);
-        // $arrayGetTraining[] = $gettraining;
-        // dd($arrayGetTraining); 
         if(!($this->isPartisipanExist($id_currentuser, $id_currenttraining))) {
-            return view('registraining', ['get' => $gettraining]);
+            if($id_currentuser != session()->get('id_loggedin_user')) {
+                // dd($id_currentuser);
+                return redirect('main');
+            }
+            else{
+                return view('registraining', ['get' => $gettraining]);
+            }
         }
+        
         else {
             // session()->flash('existUser', "you've been Applying");
             if($this->isAccepted($id_currentuser, $id_currenttraining)) {
                 return redirect()->action('TrainingController@getPertemuan', ['id_training' => (int)$id_currenttraining]);
             }
-            else{
-                // $session['telah_ikut'] = ()$id_currentuser;
+            else{  
                 session(['user_telah_ikut' => (int)$id_currentuser]);
                 session(['di_training' => (int)$id_currenttraining]);
-                // dd(session()->get('di_training'));
-                // dd(session()->get('user_telah_ikut'));
-                // dd(session()->get('id_loggedin_user'));
-                // dd(session()->all());
                 return redirect('main');
             }
         }

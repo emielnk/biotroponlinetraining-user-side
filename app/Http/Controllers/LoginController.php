@@ -38,12 +38,6 @@ class LoginController extends Controller
             $user = $query->select('id_user', 'nama')->first();
             $id = $user['id_user'];
             session(['id_loggedin_user' => $id]);
-            // $datasesssion = session()->all();
-            // dd($datasesssion);
-            // dd(session(['authenticated' => $id]));
-            // dd($user);
-            // dd($id);
-            // $currentuser = $this->getUserId($userarray);
             $trainings = $this->listtraining();
             // dd($trainings);
             return redirect('main')->with('auth', $user);

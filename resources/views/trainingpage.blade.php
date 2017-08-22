@@ -1,4 +1,4 @@
-@extends ('layouts.dashboard')
+@extends ('layouts.dashboardloggedin')
 @section('page_heading','Pertemuan')
 @section('section')
 
@@ -19,6 +19,14 @@
                 </div>
             </div>
             @endforeach
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="/evaluasi/{{$id}}"><h3 class="panel-title">Evaluasi</h3></a>
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+            </div>
         </div>
     </div>
     

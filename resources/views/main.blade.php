@@ -41,7 +41,7 @@
                     @if((session()->get('user_telah_ikut')===session('id_loggedin_user')) && (session()->get('di_training')=== $listtrain->id_training))
                    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModals">You've applying this training</button>       
                     @else
-                    <p><a class="btn btn-primary btn-lg" href="registertraining/formjoin/{{ session()->get('id_loggedin_user') }}/{{ $listtrain->id_training }}" role="button">Apply This Training</a></p>
+                    <p><a class="btn btn-primary btn-lg" href="registertraining/formjoin/{{ (session()->get('id_loggedin_user')) }}/{{ $listtrain->id_training }}" role="button">Apply This Training</a></p>
                     @endif
             </div>
         </div>

@@ -50,10 +50,6 @@
                             <a href="/main"><i class="fa fa-book fa-fw"></i> Training</a>
                         </li>
 
-                        <li {{ (Request::is('*evaluasi') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('evaluasi') }}"><i class="fa fa-thumbs-o-up fa-fw"></i> Evaluasi </a>
-                        </li>
-
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

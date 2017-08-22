@@ -30,12 +30,15 @@ Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('registraining', function() {
 		return View::make('registraining');
 	});
+	Route::get('/absen/{id_user}/{id_pertemuan}', 'AbsenController@absenPertemuan');
 	Route::get('trainingpage/bahan/{id_pertemuan}', 'TrainingController@getBahan');
 	// Route::get('registertraining', 'RegisTrainingController@showavalibel');
 	Route::get('main', 'RegisTrainingController@showavalible');
 	Route::get('registertraining/formjoin/{id_user}/{id_training}', 'RegisTrainingController@registertrainingView');
 	Route::get('/', 'RegisTrainingController@showavalible');
+	Route::get('/evaluasi/{id_training}', 'EvaluasiController@page');
 	Route::post('registertraining/join/{id_training}', 'RegisTrainingController@registertraining');
+	
 });
 
 Route::get('/registerpage', function() {
