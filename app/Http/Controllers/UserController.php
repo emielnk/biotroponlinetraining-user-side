@@ -8,17 +8,9 @@ use App\Models\User;
 class UserController extends Controller
 {
   function getCurrentUserInfo() {
-    $user_id = session()->get('id_loggedin_user');
+    $this->$user_id = session()->get('id_loggedin_user');
     $currentUser = User::find($user_id);
     //dd($currentUser);
     return $currentUser;
   }
-  
-  
-
-
-
-
-
-
 }

@@ -14,6 +14,8 @@
 Route::get('/debuguserinfo', 'UserController@getCurrentUserInfo');
 Route::get('/debugregistraining', 'RegisTrainingController@registertraining');
 Route::get('debugisexist/{id_user}/{id_training}', 'RegisTrainingController@isPartisipanExist');
+Route::get('debug', 'EvaluasiController@saveEval');
+
 
 Route::post('/loginUser', 'LoginController@login');
 Route::post('/register', 'RegisterController@register');
@@ -38,7 +40,7 @@ Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('/', 'RegisTrainingController@showavalible');
 	Route::get('/evaluasi/{id_training}', 'EvaluasiController@page');
 	Route::post('registertraining/join/{id_training}', 'RegisTrainingController@registertraining');
-	
+	Route::get('test/{id_training}', 'TestController@getTest');
 });
 
 Route::get('/registerpage', function() {

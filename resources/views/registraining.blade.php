@@ -64,7 +64,7 @@
                 </div>
             </div>   
             <br>
-            <button type="submit" class="btn btn-default">Submit Button</button>
+            <button type="submit" class="btn btn-primary">Submit Button</button>
             <button type="reset" class="btn btn-default">Reset Button</button>
             {{ csrf_field() }}
         </form>

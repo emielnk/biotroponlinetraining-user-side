@@ -9,6 +9,7 @@ use App\Models\Training;
 
 class EvaluasiController extends Controller
 {
+    
     public function page($id_training) {
         $trainings = Training::find($id_training);
         $id = $trainings->id_training;
@@ -26,5 +27,10 @@ class EvaluasiController extends Controller
     public function cekSudahPernah($id_user, $id_training) {
         $isExists = Evaluasi::where('id_training', $id_training)->where('id_user', $id_user)->exists();
         return $isExists;
+    }
+
+    public function saveEval(Request $requset) {
+        $eval = new Evaluasi;
+        
     }
 }
