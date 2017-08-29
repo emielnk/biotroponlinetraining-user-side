@@ -30,7 +30,7 @@
     </style>
 
     @foreach($list as $listtrain)
-        <div class="jumbotron">
+        <div class="jumbotron jum-{{$listtrain->id_training}}">
             <div class="container" align="center">
                 <h1>{{ $listtrain->nama_training }}</h1>
                 <p>{{ $listtrain->deskripsi_training }}</p>

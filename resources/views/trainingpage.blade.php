@@ -2,12 +2,46 @@
 @section('page_heading','Pertemuan')
 @section('section')
 
-    
+<div id="myModals" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">You've done this test</h4>
+            </div>
+            <div class="modal-body">
+                <p>Thank You</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{$judulTraining}}</h3>
         </div>
         <div class="panel-body">
+        <div class="panel panel-default">
+            @if(session()->has('sudah_pre'))
+                <div class="panel-heading">
+                    <a href="#myModals" data-toggle="modal" ><h3 class="panel-title">Pretest</h3></a>
+                </div>
+                <div class="panel-body">
+                    <p><strong>Your Mark: {{ $nilaipre }}</strong>
+                </div>
+            @else
+                <div class="panel-heading">
+                    <a href="/pretest/{{ $train->id_training }}"><h3 class="panel-title">Pretest</h3></a>
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+            @endif
+            </div>
             <!-- panel dalam panel -->
             @foreach($pertemuan as $pertem)
             <div class="panel panel-default">
@@ -19,6 +53,23 @@
                 </div>
             </div>
             @endforeach
+            <div class="panel panel-default">
+            @if(session()->has('sudah_post'))
+                <div class="panel-heading">
+                    <a href="#myModals" data-toggle="modal"><h3 class="panel-title">Postest</h3></a>
+                </div>
+                <div class="panel-body">
+                    <p><strong>Your Mark: {{ $nilaipost }}</strong>
+                </div>
+            @else
+                <div class="panel-heading">
+                    <a href="/postest/{{ $train->id_training }}"><h3 class="panel-title">Postest</h3></a>
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+            @endif
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="/evaluasi/{{$id}}"><h3 class="panel-title">Evaluasi</h3></a>

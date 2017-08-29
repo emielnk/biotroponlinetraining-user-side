@@ -11,19 +11,11 @@
 |
 */
 // debugging
-Route::get('/debuguserinfo', 'UserController@getCurrentUserInfo');
-Route::get('/debugregistraining', 'RegisTrainingController@registertraining');
-Route::get('debugisexist/{id_user}/{id_training}', 'RegisTrainingController@isPartisipanExist');
-Route::get('debug', 'EvaluasiController@saveEval');
-
-
 Route::post('/loginUser', 'LoginController@login');
 Route::post('/register', 'RegisterController@register');
 Route::get('/logout', 'LoginController@logout');
 //Route::get('/getuser', 'LoginController@updateProfile');
 //Route::get('listtraining', 'TrainingController@listtraining');
-
-
 Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('main', function() {
 		return redirect()->action('RegisTrainingController@showavalible');
@@ -40,7 +32,13 @@ Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('/', 'RegisTrainingController@showavalible');
 	Route::get('/evaluasi/{id_training}', 'EvaluasiController@page');
 	Route::post('registertraining/join/{id_training}', 'RegisTrainingController@registertraining');
-	Route::get('test/{id_training}', 'TestController@getTest');
+	Route::get('pretest/{id_training}', 'TestController@getPreTest');
+	Route::get('postest/{id_training}', 'TestController@getPostTest');
+	Route::get('userprofile', 'ProfileController@index');
+	Route::post('userprofile/save', 'ProfileController@update');
+	Route::post('pretest/pretest/save/{id_test}', 'TestController@saveUserAnswerPre');
+	Route::post('postest/postest/save/{id_test}', 'TestController@saveUserAnswerPost');
+	// Route::get('postest/{id_training}', 'TestController@getTestPos');
 });
 
 Route::get('/registerpage', function() {

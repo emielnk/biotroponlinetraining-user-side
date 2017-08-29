@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('') }}">Biotrop Online Training</a>
+                <a class="navbar-brand" href="/">Biotrop Online Training</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -22,7 +22,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                  
-                        <li><a href="{{ url ('userprofile')}}"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                        <li><a href="/userprofile"><i class="fa fa-user fa-fw"></i>User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

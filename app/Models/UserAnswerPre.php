@@ -8,5 +8,5 @@ class UserAnswerPre extends Model
 {
     public $timestamps = false;
     protected $table = 'user_answer_pre';
-    protected $primaryKey = 'id_useranswerpre';
+    protected $primaryKey = 'id_pretest';
 }
