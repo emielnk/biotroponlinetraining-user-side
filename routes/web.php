@@ -28,13 +28,14 @@ Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('trainingpage/bahan/{id_pertemuan}', 'TrainingController@getBahan');
 	// Route::get('registertraining', 'RegisTrainingController@showavalibel');
 	Route::get('main', 'RegisTrainingController@showavalible');
-	Route::get('registertraining/formjoin/{id_user}/{id_training}', 'RegisTrainingController@registertrainingView');
+	Route::get('registertraining/formjoin/{id_training}', 'RegisTrainingController@registertrainingView');
 	Route::get('/', 'RegisTrainingController@showavalible');
 	Route::get('/evaluasi/{id_training}', 'EvaluasiController@page');
 	Route::post('registertraining/join/{id_training}', 'RegisTrainingController@registertraining');
 	Route::get('pretest/{id_training}', 'TestController@getPreTest');
 	Route::get('postest/{id_training}', 'TestController@getPostTest');
 	Route::get('userprofile', 'ProfileController@index');
+	Route::post('update_photo', 'ProfileController@update_photo');
 	Route::post('userprofile/save', 'ProfileController@update');
 	Route::post('pretest/pretest/save/{id_test}', 'TestController@saveUserAnswerPre');
 	Route::post('postest/postest/save/{id_test}', 'TestController@saveUserAnswerPost');

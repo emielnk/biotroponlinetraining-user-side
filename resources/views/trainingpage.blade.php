@@ -2,6 +2,16 @@
 @section('page_heading','Pertemuan')
 @section('section')
 
+
+@if(Session::has('ikutpre'))
+    <p class="alert {{ Session::get('alert-class', 'alert-danger') }}" align="center">{{ Session::get('ikutpre') }}</p>
+@endif
+@if(Session::has('mohonmaaf'))
+    <p class="alert {{ Session::get('alert-class', 'alert-danger') }}" align="center">{{ Session::get('mohonmaaf') }}</p>
+@endif
+@if(Session::has('takadasoal'))
+    <p class="alert {{ Session::get('alert-class', 'alert-danger') }}" align="center">{{ Session::get('takadasoal') }}</p>
+@endif
 <div id="myModals" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->

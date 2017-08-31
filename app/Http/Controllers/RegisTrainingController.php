@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use App\Models\Partisipan;
 use App\Models\Training;
 use App\Models\User;
@@ -18,10 +19,10 @@ class RegisTrainingController extends Controller
         return view('main', ['list' => $trainings]);
     }
 
-    public function registertrainingView($id_currentuser, $id_currenttraining) {
+    public function registertrainingView($id_currenttraining) {
         $gettraining = Training::find($id_currenttraining);
-        if(!($this->isPartisipanExist($id_currentuser, $id_currenttraining))) {
-            if($id_currentuser != session()->get('id_loggedin_user')) {
+        if(!($this->isPartisipanExist(session()->get('id_loggedin_user'), $id_currenttraining))) {
+            if(!session()->get('id_loggedin_user')) {
                 // dd($id_currentuser);
                 return redirect('main');
             }
@@ -32,12 +33,13 @@ class RegisTrainingController extends Controller
         
         else {
             // session()->flash('existUser', "you've been Applying");
-            if($this->isAccepted($id_currentuser, $id_currenttraining)) {
+            if($this->isAccepted(session()->get('id_loggedin_user'), $id_currenttraining)) {
                 return redirect()->action('TrainingController@getPertemuan', ['id_training' => (int)$id_currenttraining]);
             }
             else{  
-                session(['user_telah_ikut' => (int)$id_currentuser]);
+                session(['user_telah_ikut' => (int)session()->get('id_loggedin_user')]);
                 session(['di_training' => (int)$id_currenttraining]);
+                Session::flash('sudahikut', "you've been applying, please wait for confirmation");
                 return redirect('main');
             }
         }

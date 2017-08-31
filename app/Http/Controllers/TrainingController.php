@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Training;
 use App\Models\Pertemuan;
@@ -51,7 +51,9 @@ class TrainingController extends Controller
     } 
 
     public function getUserNilaiPre(int $id_test) {
-        $jawaban = UserAnswerPre::where('id_user', session()->get('id_loggedin_user'))->where('id_test', $id_test)->where('nilai', 1)->count();
+        $jawaban = UserAnswerPre::where('id_user', session()->get('id_loggedin_user'))
+                                ->where('id_test', $id_test)
+                                ->where('nilai', 1)->count();
         $soal = QuestionTest::where('id_test', $id_test)->count();
         // dd($soal);
         $nilai = ($jawaban/$soal)*100;
@@ -68,7 +70,8 @@ class TrainingController extends Controller
     }
 
     public function getUserNilaiPost(int $id_test) {
-        $jawaban = UserAnswerPost::where('id_user', session()->get('id_loggedin_user'))->where('id_test', $id_test)->where('nilai', 1)->count();
+        $jawaban = UserAnswerPost::where('id_user', session()->get('id_loggedin_user'))
+                                 ->where('id_test', $id_test)->where('nilai', 1)->count();
         $soal = QuestionTest::where('id_test', $id_test)->count();
         // dd($soal);
         $nilai = ($jawaban/$soal)*100;
@@ -82,23 +85,29 @@ class TrainingController extends Controller
             return view('bahan', ['bahans' => $bahans, 'id' => $id_pertemuan]);
         }
         else {
-            return redirect()->action('RegisTrainingController@showavalible');
+            Session::flash('mohonmaaf', 'Cannot attempt now');
+            return redirect()->back();
         }
     }
 
     public  function cekSudahTerima(int $id_training) {
-        $isExists = Partisipan::where('id_user', session()->get('id_loggedin_user'))->where('id_training', $id_training)->where('status', 1)->exists();
+        $isExists = Partisipan::where('id_user', session()->get('id_loggedin_user'))
+                              ->where('id_training', $id_training)
+                              ->where('status', 1)->exists();
         // dd($isExists);
         return $isExists;
     }
 
     public function cekSudahIkutPre(int $id_test) {
-        $isExist = UserAnswerPre::where('id_user', session()->get('id_loggedin_user'))->where('id_test', $id_test)->exists();
+        $testnya = Test::find($id_test);
+        $isExist = UserAnswerPre::where('id_user', session()->get('id_loggedin_user'))
+                                ->where('id_test', $id_test)->exists();
         return $isExist;
     }
 
     public function cekSudahIkutPost(int $id_test) {
-        $isExist = UserAnswerPost::where('id_user', session()->get('id_loggedin_user'))->where('id_test', $id_test)->exists();
+        $isExist = UserAnswerPost::where('id_user', session()->get('id_loggedin_user'))
+                                 ->where('id_test', $id_test)->exists();
         return $isExist;
     }
 

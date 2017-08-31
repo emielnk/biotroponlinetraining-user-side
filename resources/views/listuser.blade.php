@@ -14,7 +14,6 @@
                       <th>Instansi</th>
                       <th>Pendidikan Terakhir</th>
                       <th>Action</th>
-
                   </tr>
               </thead>
                   <tbody>
