@@ -44,6 +44,7 @@ class ProfileController extends Controller
         // dd($request);
         $user = User::find(session()->get('id_loggedin_user'));
         $file = $request->file('avatar');
+        // dd($file);
         $this->validate($request, [
             'avatar' => 'image|mimes:jpeg,png,jpg|max:1024'
         ]);

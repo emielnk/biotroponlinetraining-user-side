@@ -36,7 +36,7 @@
         </div>
         <div class="panel-body">
         <div class="panel panel-default">
-            @if(session()->has('sudah_pre'))
+            @if($nilaipre != null)
                 <div class="panel-heading">
                     <a href="#myModals" data-toggle="modal" ><h3 class="panel-title">Pretest</h3></a>
                 </div>
@@ -64,7 +64,7 @@
             </div>
             @endforeach
             <div class="panel panel-default">
-            @if(session()->has('sudah_post'))
+            @if($nilaipost != null)
                 <div class="panel-heading">
                     <a href="#myModals" data-toggle="modal"><h3 class="panel-title">Postest</h3></a>
                 </div>

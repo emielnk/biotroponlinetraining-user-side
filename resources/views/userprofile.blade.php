@@ -1,5 +1,6 @@
 @extends('layouts.dashboardloggedin')
 @section('section')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
         $(document).ready( function() {
             $(document).on('change', '.btn-file :file', function() {
@@ -64,7 +65,6 @@
     @if(Session::has('updated'))
     <p class="alert {{ Session::get('alert-class', 'alert-success') }}" align="center">{{ Session::get('updated') }}</p>
     @endif
-    
     <ul class="nav nav-pills">
         <li class="active"><a href="#formEdit" data-toggle="tab">Home</a></li>
         <li><a href="#pretestinfo" data-toggle="tab">My PreTest Info</a></li>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="col-lg-6">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                
                 <form method="POST" action="/update_photo" enctype="multipart/form-data">
                     <div class="col-sm-4">
                         <div class="kv-avatar center-block text-center" style="width:200px">
