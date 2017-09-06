@@ -10,12 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// debugging
-Route::post('/loginUser', 'LoginController@login');
-Route::post('/register', 'RegisterController@register');
-Route::get('/logout', 'LoginController@logout');
-//Route::get('/getuser', 'LoginController@updateProfile');
-//Route::get('listtraining', 'TrainingController@listtraining');
+
+
+Route::get('logout', 'LoginController@logout');
+Route::post('loginUser', 'LoginController@login');
 Route::group(['middleware' => 'loginKernel'], function() {
 	Route::get('main', function() {
 		return redirect()->action('RegisTrainingController@showavalible');
@@ -61,73 +59,130 @@ Route::get('login', function()
 	}
 });
 
+///////GABUNGAN SAMA AYUB////////
 
-// Route::get('/', function()
-// {
-// 	if(session()->has('email') && session()->has('password')){
-// 		return View::make('main');
-// 	}
-// 	else{
-// 		return View::make('login');
-// 	}
-// });
 
-Route::get('/charts', function()
-{
-	return View::make('mcharts');
+
+Route::group(['Middleware' => 'Auth'], function () {
+	Route::get('dashboard','HomeController@index');
+
+	// Pemohon
+	Route::get('daftartrainingpemohon','UserController@daftartraining');
+	// daftar pemohon
+	Route::get('daftartrainingpemohon/{id_training}', [
+		'uses' => 'UserController@showpemohon',
+		'as' => 'listpemohon'
+	]);
+	// diterima
+	Route::get('daftartrainingpemohon/{id_user}/diterima', [
+		'uses' => 'UserController@terimatraining',
+		'as' => 'terimatraining'
+	]);
+	// ditolak
+	Route::get('daftartrainingpemohon/{id_user}/ditolak', [
+		'uses' => 'UserController@tolaktraining',
+		'as' => 'tolaktraining'
+	]);
+	// pengumuman
+	Route::get('pengumuman','HomeController@pengumuman');
+	// new pengumuman
+	Route::get('newpengumuman','HomeController@newpengumuman');
+	Route::post('newpengumuman/save', [
+		'uses'=>'HomeController@savepengumuman',
+		'as' => 'savepengumuman'
+	]);
+	// edit pengumuman
+	Route::get('pengumuman/edit', 'HomeController@editpengumuman');
+	Route::post('pengumuman/updatepengumuman', [
+		'uses'=>'HomeController@updatepengumuman',
+		'as' => 'updatepengumuman'
+	]);
+
+
+
+	Route::get('listtraining','AdminTrainingController@listtraining');
+
+	// new training
+	Route::get('newtraining','AdminTrainingController@newtraining');
+	Route::post('newtraining/save', [
+		'uses'=>'AdminTrainingController@savetraining',
+		'as' => 'savetraining'
+	]);
+	// showtraining
+	Route::get('listtraining/show/{id_training}', 'AdminTrainingController@showtraining');
+
+	//show peserta
+	Route::get('listtraining/show/{id_training}/peserta', [
+		'uses' => 'UserController@showpeserta',
+		'as' => 'pesertatraining'
+	]);
+
+	// edit training
+	Route::get('listtraining/{id_training}/edit', 'AdminTrainingController@edittraining');
+	Route::post('listtraining/{id_training}/updatetraining', [
+		'uses'=>'AdminTrainingController@updatetraining',
+		'as' => 'updatetraining'
+	]);
+	// hapus training
+	Route::get('listtraining/destroy/{id_training}', 'AdminTrainingController@destroy');
+
+
+	// detail training => isi pertemuan
+	Route::get('listtraining/show/{id_training}/detailtraining', [
+		'uses' => 'PertemuanController@showpertemuan',
+		'as' => 'detailtraining'
+	]);
+	// new pertemuan
+	Route::get('listtraining/show/{id_training}/detailtraining/newpertemuan','PertemuanController@newpertemuan');
+	Route::post('newpertemuan/save', [
+		'uses'=>'PertemuanController@savepertemuan',
+		'as' => 'savepertemuan'
+	]);
+	// edit pertemuan
+	Route::get('listtraining/show/{id_training}/detailtraining/edit/{id_pertemuan}', [
+		'uses'=>'PertemuanController@editpertemuan',
+		'as' => 'editpertemuan'
+	]);
+	Route::post('listtraining/{id_training}/updatepertemuan/{id_pertemuan}', [
+		'uses'=>'PertemuanController@updatepertemuan',
+		'as' => 'updatepertemuan'
+	]);
+	// hapus pertemuan
+	Route::get('listtraining/{id_training}/destroy/{id_pertemuan}', [
+		'uses'=>'PertemuanController@destroytemu',
+		'as' => 'destroytemu'
+	]);
+
+
+	// newtest
+	Route::get('listtraining/show/{id_training}/detailtraining/newtest', 'AdminTestController@shownewtest');
+	// save test
+	Route::post('listtraining/show/{id_training}/detailtraining/newtest/save', 'AdminTestController@savequestiontest');
+	Route::get('listtraining/show/{id_training}/detailtraining/showtest', 'AdminTestController@showdone');
+	// show test
+	Route::get('listtraining/show/{id_training}/detailtraining/{id_test}/showtest', [
+		'uses'=>'AdminTestController@showtest',
+		'as'	=>'showtest'
+	]);
+
+	// newtest question
+	Route::get('listtraining/show/{id_training}/detailtraining/{id_test}/showtest/newquestion', 'AdminTestController@addnewquestion');
+	// save question
+	Route::post('listtraining/show/{id_training}/detailtraining/{id_test}/showtest/newtest/save', 'AdminTestController@savequestiontest');
+	// edit question
+	Route::get('listtraining/show/detailtraining/{id_test}/showtest/edit/{id_question}', [
+		'uses'=>'AdminTestController@editquestion',
+		'as'	=>'editquestion'
+	]);
+	// update question
+	Route::post('/listtraining/show/detailtraining/{id_test}/showtest/edit/save',[
+		'uses'=>'AdminTestController@updatequestion',
+		'as'	=>'updatequestion'
+	]);
+	//hapus question
+	Route::get('listtraining/show/detailtraining/{id_test}/showtest/{id_question}/destroy', [
+		'uses'=>'AdminTestController@destroyquestion',
+		'as' => 'destroyquestion'
+	]);
+
 });
-
-Route::get('/tables', function()
-{
-	return View::make('table');
-});
-
-Route::get('/forms', function()
-{
-	return View::make('form');
-});
-
-Route::get('/grid', function()
-{
-	return View::make('grid');
-});
-
-Route::get('/buttons', function()
-{
-	return View::make('buttons');
-});
-
-
-Route::get('/icons', function()
-{
-	return View::make('icons');
-});
-
-Route::get('/panels', function()
-{
-	return View::make('panel');
-});
-
-Route::get('/typography', function()
-{
-	return View::make('typography');
-});
-
-Route::get('/notifications', function()
-{
-	return View::make('notifications');
-});
-
-Route::get('/blank', function()
-{
-	return View::make('blank');
-});
-
-Route::get('/documentation', function()
-{
-	return View::make('documentation');
-});
-
-Route::get('user/activation/{token}', 'RegisterController@userActivation');
-
-Route::get('/home', 'HomeController@index');

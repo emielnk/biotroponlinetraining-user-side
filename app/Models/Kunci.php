@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Kunci extends Model
+class kunci extends Model
 {
-    protected $table = 'kunci';
-    public $timestamps = false;
+  protected $table = 'kunci';
+
+  protected $primaryKey = 'id_kunci';
+
+  public $timestamps = false;
 }

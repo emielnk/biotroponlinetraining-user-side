@@ -17,8 +17,10 @@ class ProfileController extends Controller
 {
     public function index() {
         $id = session()->get('id_loggedin_user');
+        // dd($id);
         $user = User::find($id);
         $infoPre = $this->getUserNialiPre();
+        // dd($infoPre);
         $infoPos = $this->getUserNialiPost();
         // dd($user);
         return view('userprofile', ['user' => $user, 'nilaipre' => $infoPre, 'nilaipos'=> $infoPos]);

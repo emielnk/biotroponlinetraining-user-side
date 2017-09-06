@@ -1,4 +1,5 @@
 @extends('layouts.plane')
+
 @section('body')
  <div id="wrapper">
 
@@ -11,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('') }}">Biotrop Online Training</a>
+                <a class="navbar-brand" href="{{ url ('dashboard') }}">Biotrop Online Training</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -42,7 +43,11 @@
                     <ul class="nav" id="side-menu">
 
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('') }}"><i class="fa fa-home fa-fw"></i> Home </a>
+                            <a href="{{ url ('dashboard') }}"><i class="fa fa-home fa-fw"></i> Home </a>
+                        </li>
+
+                        <li {{ (Request::is('*pengumuman') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('pengumuman') }}"><i class="fa fa-th-large fa-fw"></i> Pengumuman </a>
                         </li>
 
                         <li >
@@ -54,16 +59,11 @@
                                 <li {{ (Request::is('*listtraining') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('listtraining' ) }}">List Training</a>
                                 </li>
-                                <li {{ (Request::is('*listpemohon') ? 'class="active"' : '') }}>
-                                    <a href="{{ url('listpemohon') }}">List Pemohon</a>
+                                <li {{ (Request::is('*daftartrainingpemohon') ? 'class="active"' : '') }}>
+                                    <a href="{{ url('daftartrainingpemohon') }}">List Pemohon</a>
                                 </li>
                             </ul>
                         </li>
-
-                        <li {{ (Request::is('*evaluasi') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('evaluasi') }}"><i class="fa fa-thumbs-o-up fa-fw"></i> Evaluasi </a>
-                        </li>
-
 
                         <li {{ (Request::is('*listuser') ? 'class="active"' : '') }}>
                             <a href="{{ url ('listuser') }}"><i class="fa fa-user fa-fw"></i> User </a>

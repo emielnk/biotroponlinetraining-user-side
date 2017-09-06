@@ -37,13 +37,15 @@
 					var table = $("#listtraining").DataTable();
 					var table = $("#listpemohon").DataTable();
 					var table = $("#listuser").DataTable();
+					var table = $("#listpemohontraining").DataTable();
+					var table = $("#listpeserta").DataTable();
 			});
 	</script>
 	<!--/dataTables-->
 
 	<!--datepicker-->
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-	<script>
+	<!-- <script>
 			$(function()
 			{
 						$( "#datepicker" ).datepicker(
@@ -54,7 +56,7 @@
 							}
 						);
 			});
-	</script>
+	</script> -->
 	<!--/datepicker-->
 
 	<!--tiny mce editor-->

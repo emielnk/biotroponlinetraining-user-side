@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evaluasi extends Model
 {
-    public $timestamps = false;
-    protected $table = 'evaluasi';
-    protected $promaryKey = 'id_eval';
+  protected $table = 'Evaluasi';
+
+  protected $primaryKey = 'id_eval';
+
+  public $timestamps = false;
 }
