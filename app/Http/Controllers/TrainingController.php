@@ -22,6 +22,7 @@ class TrainingController extends Controller
         if($this->cekSudahTerima($id_training)) {
             $pertemuans = Pertemuan::where('id_training', $id_training)->get();
             $training = Training::find($id_training);
+            $bahan = Bahan::all();
             $jumlahPertemuanTraining = Pertemuan::where('id_training', $id_training)->count();
             $test = Test::where('id_training', $id_training)->first();
             // dd($test);
@@ -43,7 +44,7 @@ class TrainingController extends Controller
             else {
                 $nilaipost = null;
             }
-            return view('trainingpage', ['nilaipost' => $nilaipost,'nilaipre' => $nilaipre,'train' => $training,'pertemuan' => $pertemuans, 'judulTraining' => $judulTraining, 'id' => $id]);
+            return view('trainingpage', ['bahan'=>$bahan, 'nilaipost' => $nilaipost,'nilaipre' => $nilaipre,'train' => $training,'pertemuan' => $pertemuans, 'judulTraining' => $judulTraining, 'id' => $id]);
         }
         else {
             return redirect()->action('RegisTrainingController@showavalible');

@@ -15,7 +15,7 @@
           <div class="col-md-6">
             <div class="form-group">
                 <label>Question</label>
-                <input id="question" name="question" class="form-control" type="text" autofocus value="{{$quest->questions}}">
+                <input id="question" name="question" class="form-control" type="text" autofocus value="{{$quest->question}}">
                 <input type="text" name="id_question" value="{{$quest->id_question}}" hidden>
             </div>
           </div>

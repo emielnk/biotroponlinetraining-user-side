@@ -34,7 +34,7 @@ class AdminTestController extends Controller
     {
       $newquestion = new QuestionTest;
       $newquestion -> id_test = $request -> id_test;
-      $newquestion -> questions = $request -> question[$i] ;
+      $newquestion -> question = $request -> question[$i] ;
       $newquestion -> save();
 
       $newanswer1 = new OptionTest;
@@ -59,7 +59,7 @@ class AdminTestController extends Controller
     }
 
     return redirect()->action(
-          'TestController@showdone', ['id_test' => $request->id_test]
+          'AdminTestController@showdone', ['id_test' => $request->id_test]
       );
   }
 
@@ -107,7 +107,7 @@ class AdminTestController extends Controller
   {
     $question = QuestionTest::where('id_question',$request->id_question)->get();
     foreach ($question as $quest) {}
-    $quest->questions = $request->question;
+    $quest->question = $request->question;
     $quest -> save();
 
     $answer = OptionTest::where('id_option',$request->id_answer1)->get();

@@ -1,6 +1,14 @@
 @extends('layouts.dashboard')
 @section('page_heading','Edit Training')
 @section('section')
+
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>  
+
 <div class="col-sm-12">
 <div class="row">
     <div class="col-lg-6">
@@ -12,14 +20,30 @@
               <p class="form-control-static">{{$judul->nama_training}}</p>
           </div>
 
-          <div class="form-group">
-              <label>Tanggal Pelaksanaan</label>
-              <input name="tanggal_pelaksanaan" class="form-control" type="text" value="{{ $temuan->tanggal_pelaksanaan }}">
-          </div>
+          <div>
+          <label>Tanggal Pelaksanaan</label>
+              <div class="row">
+                  <div class="col-sm-5">
+                      <div class="form-group">
+                          <div class="input-group date" id="datetimepicker">
+                              <input class="form-control date" name="tanggal_pelaksanaan"  require value="{{ $temuan->tanggal_pelaksanaan }}">
+                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                              <script type="text/javascript">
+                                  $('.date').datepicker({  
+                                      format: 'mm-dd-yyyy'  
+                                  });                  
+                              </script>  
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
 
           <div class="form-group">
               <label>Deskripsi Pertemuan</label>
-              <textarea name="deskripsi_pertemuan" class="form-control" rows="3">{!! $temuan->deskripsi_pertemuan !!}</textarea>
+              <textarea name="deskripsi_pertemuan" class="form-control" rows="3" require>{!! $temuan->deskripsi_pertemuan !!}</textarea>
           </div>
 
           <div class="form-group">

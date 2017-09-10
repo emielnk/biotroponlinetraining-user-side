@@ -23,6 +23,7 @@ class TestController extends Controller
 
     public function saveUserAnswerPost(Request $req, int $id_test) {
         // dd($id_test);
+        dd($req);
         $quests = $this->getQuestion($id_test);
         // dd(sizeof($quests));
         $arr = [];
@@ -62,6 +63,7 @@ class TestController extends Controller
 
 
     public function saveUserAnswerPre(Request $req, int $id_test) {
+        dd($req);
         $quests = $this->getQuestion($id_test);
         $arr = [];
         $i = 0;

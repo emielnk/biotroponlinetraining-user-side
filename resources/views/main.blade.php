@@ -36,7 +36,7 @@
         <div class="jumbotron jum-{{$listtrain->id_training}}">
             <div class="container" align="center">
                 <h1>{{ $listtrain->nama_training }}</h1>
-                <p>{{ $listtrain->deskripsi_training }}</p>
+                <p>{!! $listtrain->deskripsi_training !!}</p>
                     <ul>
                         <p><li>Date Start:  <strong>{{ $listtrain->tanggal_mulai }}</strong></li></p> 
                         <p><li>Date End  :  <strong>{{ $listtrain->tanggal_akhir }}</strong></li></p>

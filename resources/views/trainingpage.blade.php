@@ -59,7 +59,17 @@
                     <a href="/trainingpage/bahan/{{$pertem->id_pertemuan}}"><h3 class="panel-title">{{$pertem->tanggal_pelaksanaan}}</h3></a>
                 </div>
                 <div class="panel-body">
-                    {{$pertem->deskripsi_pertemuan}}
+                    {!!$pertem->deskripsi_pertemuan!!}
+
+                    <ul>
+                        @if($bahan)
+                        @foreach($bahan as $bahans)
+                        @if($bahans->id_pertemuan == $pertem->id_pertemuan)
+                            <a href="{{asset('bahan/'.$bahans->nama_bahan)}}"><li>{{$bahans->nama_bahan}}</li></a>
+                        @endif
+                        @endforeach
+                        @endif
+                    </ul>
                 </div>
             </div>
             @endforeach
@@ -80,14 +90,7 @@
                 </div>
             @endif
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="/evaluasi/{{$id}}"><h3 class="panel-title">Evaluasi</h3></a>
-                </div>
-                <div class="panel-body">
-                    
-                </div>
-            </div>
+            
         </div>
     </div>
     
